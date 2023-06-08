@@ -436,6 +436,24 @@ compile(VALUE self, VALUE string) {
     return result;
 }
 
+static VALUE
+newlines(VALUE self, VALUE string) {
+    yp_parser_t parser;
+    size_t length = RSTRING_LEN(string);
+    yp_parser_init(&parser, RSTRING_PTR(string), length, NULL);
+
+    yp_node_t *node = yp_parse(&parser);
+    yp_node_destroy(&parser, node);
+
+    VALUE result = rb_ary_new_capa(parser.newline_list.size);
+    for (size_t index = 0; index < parser.newline_list.size; index++) {
+        rb_ary_push(result, INT2FIX(parser.newline_list.offsets[index]));
+    }
+
+    yp_parser_free(&parser);
+    return result;
+}
+
 RUBY_FUNC_EXPORTED void
 Init_yarp(void) {
     if (strcmp(yp_version(), EXPECTED_YARP_VERSION) != 0) {
@@ -475,6 +493,8 @@ Init_yarp(void) {
     rb_define_singleton_method(rb_cYARP, "memsize", memsize, 1);
 
     rb_define_singleton_method(rb_cYARP, "compile", compile, 1);
+
+    rb_define_singleton_method(rb_cYARP, "newlines", newlines, 1);
 
     Init_yarp_pack();
 }
