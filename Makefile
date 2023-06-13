@@ -1,7 +1,9 @@
 ifeq ($(shell uname), Darwin)
 SOEXT := dylib
-else
+elsifeq ($(shell uname), Linux)
 SOEXT := so
+else
+SOEXT := dll
 endif
 
 OPTFLAGS :=
