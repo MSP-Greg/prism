@@ -69,9 +69,6 @@ jobs:
       YARP_FFI_BACKEND: "true"
     steps:
       - uses: actions/checkout@v4
-      # The Gemfile.lock is different with YARP_FFI_BACKEND=true for CRuby
-      - run: rm Gemfile.lock
-        if: matrix.ruby == 'ruby'
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
