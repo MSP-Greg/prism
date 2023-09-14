@@ -20,6 +20,7 @@
 /*.iml
 *~
 
+Gemfile.lock
 test.c
 a.out
 
