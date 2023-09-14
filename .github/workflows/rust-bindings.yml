@@ -24,7 +24,7 @@ jobs:
         crate: [yarp-sys, yarp]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -57,7 +57,7 @@ jobs:
         crate: [yarp-sys, yarp]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -93,7 +93,7 @@ jobs:
         sanitizer: [address, leak]
         crate: [yarp-sys, yarp]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
