@@ -24,7 +24,11 @@ def run_script(command)
 end
 
 task make: [:templates] do
-  sh "make"
+  if RUBY_PLATFORM.include?("mswin")
+    %x(nmake)
+  else
+    sh "make"
+  end
 end
 
 task make_no_debug: [:templates] do

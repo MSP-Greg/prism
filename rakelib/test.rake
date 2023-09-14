@@ -12,7 +12,8 @@ Rake::TestTask.new(:test, &config)
 
 # If we're on JRuby or TruffleRuby, we don't want to bother to configure
 # memcheck or debug tests.
-return if RUBY_ENGINE == "jruby" || RUBY_ENGINE == "truffleruby"
+# Windows mswin can't install ruby_memcheck (Nokogiri issue)
+return if RUBY_ENGINE == "jruby" || RUBY_ENGINE == "truffleruby" || RUBY_PLATFORM.include?("mswin")
 
 # Don't bother trying to configure memcheck on old versions of Ruby.
 return if RUBY_VERSION < "3.0"
