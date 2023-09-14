@@ -43,13 +43,17 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
+        ruby: [head]
+        include:
+          - { os: windows-latest , ruby: mswin }
+
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: head
+        ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
     - name: Run Ruby tests
       run: bundle exec rake
