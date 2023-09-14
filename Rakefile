@@ -25,7 +25,7 @@ end
 
 task make: [:templates] do
   if RUBY_PLATFORM.include?("mswin")
-    %x(nmake)
+    system "nmake"
   else
     sh "make"
   end
